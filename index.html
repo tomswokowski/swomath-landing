@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swokowski Mathematics - The Beginner's Guide to Understanding Algebra</title>
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #3d5a3a;
+      --green-light: #4a6b46;
+      --green-dark: #2d4429;
+      --cream: #fdfcfa;
+      --cream-dark: #f5f3ef;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --gold: #e8a830;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 5rem;
+      text-align: center;
+      background: linear-gradient(180deg, #fff 0%, var(--cream) 100%);
+    }
+
+    .logo {
+      max-width: 220px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .break {
+      display: block;
+    }
+
+    .hero .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.75rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--green-light) 0%, var(--green) 100%);
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(61,90,58,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(61,90,58,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      box-shadow: var(--shadow-md), inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(0,0,0,0.08);
+    }
+
+    .btn-disabled {
+      background: var(--cream-dark);
+      color: var(--text-muted);
+      cursor: default;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    /* Stats */
+    .stats {
+      background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+      padding: 3rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item {
+      color: #fff;
+    }
+
+    .stat-number {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+    }
+
+    .stat-number .star {
+      color: var(--gold);
+      font-size: 1.75rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Features */
+    .features {
+      padding: 5rem 0;
+      background: #fff;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+      background: var(--cream);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .feature p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Instructor */
+    .instructor {
+      padding: 5rem 0;
+      background: var(--cream-dark);
+    }
+
+    .instructor-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .instructor-content h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .instructor-content h3 {
+      font-size: 1rem;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .instructor-content p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* Reviews */
+    .reviews {
+      padding: 5rem 0;
+      background: #fff;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .review {
+      background: var(--cream);
+      padding: 1.75rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .review-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .review-author {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .reviews-cta {
+      text-align: center;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .cta .btn-primary {
+      background: #fff;
+      color: var(--green);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      background: var(--cream);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 3rem 0 4rem;
+      }
+
+      .logo {
+        max-width: 180px;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .hero h1 .break {
+        display: inline;
+      }
+
+      .hero h1 .break::before {
+        content: " ";
+      }
+
+      .hero .subtitle {
+        font-size: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+      }
+
+      .stat-number {
+        font-size: 1.75rem;
+      }
+
+      .stat-label {
+        font-size: 0.7rem;
+      }
+
+      .features-grid,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+
+      .cta h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <img src="logo.png" alt="Swokowski Mathematics" class="logo">
+      <h1>The Beginner's Guide to <span class="break">Understanding Algebra</span></h1>
+      <p class="subtitle">Master the fundamentals and be ready to ace any test.</p>
+      <div class="cta-buttons">
+        <a href="https://www.udemy.com/course/theultimateguidetounderstandingalgebra/" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0zm0 2.3l8.1 4.6v9.2L12 21.7l-8.1-5.6V6.9L12 2.3z"/></svg>
+          Get Course on Udemy
+        </a>
+        <a href="#" class="btn btn-disabled">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          iOS App Coming Soon
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">4.9 <span class="star">★</span></div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">30,000+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">300+</div>
+          <div class="stat-label">Lectures</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>What You'll Learn</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">📐</div>
+          <h3>Master the Fundamentals</h3>
+          <p>Build a rock-solid foundation in Algebra 1 and Algebra 2</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💡</div>
+          <h3>It's Easier Than You Think</h3>
+          <p>Clear, simple explanations that make concepts click</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <h3>Ace Any Test</h3>
+          <p>Be fully prepared to pass any Algebra exam with confidence</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📄</div>
+          <h3>1,000+ Practice Files</h3>
+          <p>Worksheets, answer keys, chapter reviews, and unit tests</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📈</div>
+          <h3>Build for the Future</h3>
+          <p>Develop skills needed for higher levels of math</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">∞</div>
+          <h3>Lifetime Access</h3>
+          <p>Learn at your own pace with unlimited access</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructor -->
+  <section class="instructor">
+    <div class="container">
+      <div class="instructor-content">
+        <h2>Meet Your Instructor</h2>
+        <h3>John Swokowski, 40+ Years Teaching Algebra</h3>
+        <p>I've taught thousands of students face-to-face throughout my career. Many came in hating math and convinced they could never understand Algebra, only to be proven wrong and realize it isn't so bad after all. I've become deeply familiar with the areas students find most challenging, and every lecture in this course is carefully designed to make the concepts click. I'm also here to help. If you have questions, I personally respond to every message.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Students Are Saying</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"This is a great class. The teacher is very good at explaining the concepts, and it's very straightforward to understand. This is a major help."</p>
+          <div class="review-author">— Ali</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Finally found the teacher who can explain in a way that makes learning easy. My regret is that I didn't do this years ago. Purchasing this course is the best money I have ever spent."</p>
+          <div class="review-author">— Joseph</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"This is a very good course. Lessons are short and to the point just like I like them. The instructor has a calm and fun way of teaching."</p>
+          <div class="review-author">— Clayton</div>
+        </div>
+      </div>
+      <div class="reviews-cta">
+        <a href="https://www.udemy.com/course/theultimateguidetounderstandingalgebra/" class="btn btn-secondary" target="_blank" rel="noopener">
+          View All Reviews on Udemy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Master Algebra?</h2>
+      <p>Join 30,000+ students and start your journey today</p>
+      <a href="https://www.udemy.com/course/theultimateguidetounderstandingalgebra/" class="btn btn-primary" target="_blank" rel="noopener">
+        Get Started on Udemy
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Swokowski Mathematics © 2025</p>
+    </div>
+  </footer>
+
+</body>
+</html>
